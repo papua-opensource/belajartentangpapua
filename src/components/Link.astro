@@ -1,0 +1,50 @@
+---
+import type { HTMLAttributes } from "astro/types";
+type Props = HTMLAttributes<"a"> & {
+  href: string | { pathname: string; query?: Record<string, string> };
+};
+const { href: rawHref, style, ...attrs } = Astro.props as Props;
+const href = (() => {
+  if (typeof rawHref === "string") {
+    return rawHref;
+  }
+  const { pathname, query } = rawHref;
+  const searchParams = new URLSearchParams(query);
+  return `${pathname}?${searchParams.toString()}`;
+})();
+const site = Astro.site;
+const { pathname } = Astro.url;
+function isActiveLink(url: string): boolean {
+  return url === pathname || url === "." || url === "./";
+}
+function isExternalLink(url: string): boolean {
+  return URL.canParse(url);
+}
+function isInternalLink(url: string): boolean {
+  return URL.canParse(url, site?.toString());
+}
+const isExternal = isExternalLink(href);
+const isInternal = isInternalLink(href);
+const isActive = isActiveLink(href);
+let relAttribute: object = {};
+let targetAttribute: object = {};
+let styleAttribute: object = {};
+if (isExternal) {
+  relAttribute = { rel: "external noreferrer" };
+  // rel 'nooppener' is implict with target '_blank' - https://www.stefanjudis.com/today-i-learned/target-blank-implies-rel-noopener/
+  targetAttribute = { target: "_blank" };
+} else if (!isInternal && isActive) {
+  relAttribute = {};
+  styleAttribute = { style: "color: red;" };
+}
+---
+
+<a
+  href={href}
+  {...styleAttribute}
+  {...relAttribute}
+  {...attrs}
+  {...targetAttribute}
+>
+  <slot />
+</a>
