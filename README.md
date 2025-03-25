@@ -1,4 +1,4 @@
-# Belajar Tentang Papua
+<h1 align="center">Belajar Tentang Papua</h1>
 
 <p align="center">
   <img src="src/assets/images/papua-land.png" alt="Logo Belajar Tentang Papua" width="200"/>
