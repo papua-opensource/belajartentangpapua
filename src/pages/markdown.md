@@ -14,3 +14,4 @@ layout: ../layouts/MainLayout.astro
   Go home
  </a>
 </div>
+

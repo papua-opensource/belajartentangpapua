@@ -6,7 +6,6 @@ import MainLayout from "@/layouts/MainLayout.astro";
 import Link from "@/components/Link.astro";
 
 import { ArrowRight } from "lucide-react";
-import Footer from "@/components/Footer.astro";
 
 const menuList = [
   {
@@ -72,107 +71,91 @@ const menuList = [
 ---
 
 <MainLayout title="Home" description="Welcome to the Astro Starter Kit">
-  <div class="min-h-screen flex flex-col">
-    <main class="flex-1 container mx-auto px-4 py-8 max-w-6xl">
-      <div
-        class="flex flex-col items-center justify-center text-center mb-16 relative"
-      >
-        <div class="grid place-content-center bg-white px-4">
-          <div class="text-center">
-            <Image
-              src={Logo}
-              class="mx-auto h-56 w-auto text-black sm:h-64"
-              alt="Logo Belajar Tentang Papua"
-            />
-            <h1
-              class="block text-gray-700 font-bold font-poppins text-4xl -mt-36"
+  <main
+    class="flex flex-col items-center justify-center text-center mb-16 relative"
+  >
+    <div class="grid place-content-center bg-white px-4">
+      <div class="text-center">
+        <Image
+          src={Logo}
+          class="mx-auto h-56 w-auto text-black sm:h-64"
+          alt="Logo Belajar Tentang Papua"
+        />
+        <h1 class="block text-gray-700 font-bold font-poppins text-4xl -mt-36">
+          <span class="relative px-1">
+            <div
+              class="absolute inset-x-0 bottom-0 h-2 transform -skew-x-12 bg-gray-300/50"
             >
-              <span class="relative px-1">
-                <div
-                  class="absolute inset-x-0 bottom-0 h-2 transform -skew-x-12 bg-gray-300/50"
-                >
-                </div>
-                <span class="relative inline-block">Belajar</span>
-              </span> Tentang Papua
-            </h1>
-          </div>
-        </div>
-        <div class="max-w-screen-lg px-0 sm:px-6 pb-10 pt-36 mx-auto">
-          <div class="text-center border-2 border-dashed border-gray-400 p-4">
-            <p class="mx-auto text-gray-500">
-              "Kumpulan informasi sederhana tentang Papua. Dibuat secara
-              kolaboratif dan bersifat open source."
-            </p>
-          </div>
-
-          <div
-            class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-4xl my-10"
-          >
-            {
-              menuList.slice(0, 3).map((menu) => (
-                <Link
-                  href={menu.link}
-                  class="border rounded-md p-6 hover:shadow-md transition-shadow group"
-                >
-                  <div class="flex justify-between items-start mb-2">
-                    <h2 class="text-xl font-semibold text-slate-700">
-                      {menu.title}
-                    </h2>
-                    <ArrowRight className="h-5 w-5 text-slate-400 group-hover:text-slate-700 transition-colors" />
-                  </div>
-                  <p class="text-slate-600 text-sm text-left">
-                    {menu.description}
-                  </p>
-                </Link>
-              ))
-            }
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl">
-            {
-              menuList.slice(3, -1).map((menu) => (
-                <Link
-                  href={menu.link}
-                  class="border rounded-md p-6 hover:shadow-md transition-shadow group"
-                >
-                  <div class="flex justify-between items-start mb-2">
-                    <h2 class="text-xl font-semibold text-slate-700">
-                      {menu.title}
-                    </h2>
-                    <ArrowRight className="h-5 w-5 text-slate-400 group-hover:text-slate-700 transition-colors" />
-                  </div>
-                  <p class="text-slate-600 text-sm text-left">
-                    {menu.description}
-                  </p>
-                </Link>
-              ))
-            }
-          </div>
-
-          <div class="grid grid-cols-1 w-full max-w-4xl mt-6">
-            {
-              menuList.slice(-1).map((menu) => (
-                <Link
-                  href={menu.link}
-                  class="border rounded-md p-6 hover:shadow-md transition-shadow group md:col-span-2"
-                >
-                  <div class="flex justify-between items-start mb-2">
-                    <h2 class="text-xl font-semibold text-slate-700">
-                      {menu.title}
-                    </h2>
-                    <ArrowRight className="h-5 w-5 text-slate-400 group-hover:text-slate-700 transition-colors" />
-                  </div>
-                  <p class="text-slate-600 text-sm text-left">
-                    {menu.description}
-                  </p>
-                </Link>
-              ))
-            }
-          </div>
-        </div>
+            </div>
+            <span class="relative inline-block">Belajar</span>
+          </span> Tentang Papua
+        </h1>
+      </div>
+    </div>
+    <div class="max-w-screen-lg px-0 sm:px-6 pb-10 pt-36 mx-auto">
+      <div class="text-center border-2 border-dashed border-gray-400 p-4">
+        <p class="mx-auto text-gray-500">
+          "Kumpulan informasi sederhana tentang Papua. Dibuat secara kolaboratif
+          dan bersifat open source."
+        </p>
       </div>
 
-      <Footer />
-    </main>
-  </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-4xl my-10">
+        {
+          menuList.slice(0, 3).map((menu) => (
+            <Link
+              href={menu.link}
+              class="border rounded-md p-6 hover:shadow-md transition-shadow group"
+            >
+              <div class="flex justify-between items-start mb-2">
+                <h2 class="text-xl font-semibold text-slate-700">
+                  {menu.title}
+                </h2>
+                <ArrowRight className="h-5 w-5 text-slate-400 group-hover:text-slate-700 transition-colors" />
+              </div>
+              <p class="text-slate-600 text-sm text-left">{menu.description}</p>
+            </Link>
+          ))
+        }
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl">
+        {
+          menuList.slice(3, -1).map((menu) => (
+            <Link
+              href={menu.link}
+              class="border rounded-md p-6 hover:shadow-md transition-shadow group"
+            >
+              <div class="flex justify-between items-start mb-2">
+                <h2 class="text-xl font-semibold text-slate-700">
+                  {menu.title}
+                </h2>
+                <ArrowRight className="h-5 w-5 text-slate-400 group-hover:text-slate-700 transition-colors" />
+              </div>
+              <p class="text-slate-600 text-sm text-left">{menu.description}</p>
+            </Link>
+          ))
+        }
+      </div>
+
+      <div class="grid grid-cols-1 w-full max-w-4xl mt-6">
+        {
+          menuList.slice(-1).map((menu) => (
+            <Link
+              href={menu.link}
+              class="border rounded-md p-6 hover:shadow-md transition-shadow group md:col-span-2"
+            >
+              <div class="flex justify-between items-start mb-2">
+                <h2 class="text-xl font-semibold text-slate-700">
+                  {menu.title}
+                </h2>
+                <ArrowRight className="h-5 w-5 text-slate-400 group-hover:text-slate-700 transition-colors" />
+              </div>
+              <p class="text-slate-600 text-sm text-left">{menu.description}</p>
+            </Link>
+          ))
+        }
+      </div>
+    </div>
+  </main>
 </MainLayout>

@@ -2,8 +2,9 @@
 import type { HTMLAttributes } from "astro/types";
 type Props = HTMLAttributes<"a"> & {
   href: string | { pathname: string; query?: Record<string, string> };
+  activeClass?: string;
 };
-const { href: rawHref, style, ...attrs } = Astro.props as Props;
+const { href: rawHref, style, activeClass, ...attrs } = Astro.props as Props;
 const href = (() => {
   if (typeof rawHref === "string") {
     return rawHref;
@@ -28,23 +29,22 @@ const isInternal = isInternalLink(href);
 const isActive = isActiveLink(href);
 let relAttribute: object = {};
 let targetAttribute: object = {};
-let styleAttribute: object = {};
+let combinedAttrs = { ...attrs };
+
 if (isExternal) {
   relAttribute = { rel: "external noreferrer" };
   // rel 'nooppener' is implict with target '_blank' - https://www.stefanjudis.com/today-i-learned/target-blank-implies-rel-noopener/
   targetAttribute = { target: "_blank" };
-} else if (!isInternal && isActive) {
-  relAttribute = {};
-  styleAttribute = { style: "color: red;" };
+} else if (isActive && activeClass) {
+  // Hanya tambahkan activeClass jika diberikan dan link aktif
+  const originalClass = attrs.class || "";
+  combinedAttrs = {
+    ...attrs,
+    class: `${originalClass} ${activeClass}`.trim(),
+  };
 }
 ---
 
-<a
-  href={href}
-  {...styleAttribute}
-  {...relAttribute}
-  {...attrs}
-  {...targetAttribute}
->
+<a href={href} {...relAttribute} {...targetAttribute} {...combinedAttrs}>
   <slot />
 </a>
